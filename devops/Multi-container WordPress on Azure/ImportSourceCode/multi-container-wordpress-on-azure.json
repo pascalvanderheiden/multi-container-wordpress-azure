@@ -1,9 +1,0 @@
-{
-  "parameters": {
-    "gitSource": {
-      "url": "https://github.com/pascalvanderheiden/multi-container-wordpress-azure.git"
-    },
-    "serviceEndpointId": "$multi-container-wordpress-on-azure-code$",
-    "deleteServiceEndpointAfterImportIsDone": true
-  }
-}
