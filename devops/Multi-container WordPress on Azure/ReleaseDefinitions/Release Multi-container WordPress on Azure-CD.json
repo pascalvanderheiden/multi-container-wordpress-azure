@@ -1,0 +1,437 @@
+{
+  "source": "userInterface",
+  "revision": 29,
+  "description": null,
+  "createdBy": "{}",
+  "createdOn": "",
+  "modifiedBy": "{}",
+  "modifiedOn": "",
+  "isDeleted": false,
+  "lastRelease": {
+    "id": 14,
+    "name": "Release-14",
+    "artifacts": [],
+    "_links": {},
+    "description": "Triggered by Build Multi-container WordPress on Azure-CI 65.",
+    "releaseDefinition": {
+      "id": 1,
+      "projectReference": null,
+      "_links": {}
+    },
+    "createdOn": "2019-12-28T13:37:54.587Z",
+    "createdBy": {
+      "displayName": "Pascal van der Heiden",
+      "url": "https://spsprodcus2.vssps.visualstudio.com/Aab3e7ea3-a025-4df5-ac30-c880cc2e2e3b/_apis/Identities/32836b1b-f9ae-6cd1-b1ca-103b5eecbadd",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/pavander/_apis/GraphProfile/MemberAvatars/aad.MzI4MzZiMWItZjlhZS03Y2QxLWIxY2EtMTAzYjVlZWNiYWRk"
+        }
+      },
+      "id": "32836b1b-f9ae-6cd1-b1ca-103b5eecbadd",
+      "uniqueName": "pavander@microsoft.com",
+      "imageUrl": "https://dev.azure.com/pavander/_apis/GraphProfile/MemberAvatars/aad.MzI4MzZiMWItZjlhZS03Y2QxLWIxY2EtMTAzYjVlZWNiYWRk",
+      "descriptor": "aad.MzI4MzZiMWItZjlhZS03Y2QxLWIxY2EtMTAzYjVlZWNiYWRk"
+    }
+  },
+  "variables": {
+    "CUSTOMID": {
+      "value": "mcwponazure-mount"
+    },
+    "FILESHARE": {
+      "value": "mcwponazure"
+    },
+    "LOCATION_WEBAPP": {
+      "value": "westeurope"
+    },
+    "MYSQLDB": {
+      "value": "wp_mcwponazuredb"
+    },
+    "RESOURCEGROUP_WEBAPP": {
+      "value": "mcwponazure-rg"
+    },
+    "TARGET_YML": {
+      "value": "docker-compose-mc-wordpress-storage.yml"
+    },
+    "WEBAPP": {
+      "value": "mcwponazure-wa"
+    },
+    "WPDBHOST": {
+      "value": ""
+    }
+  },
+  "variableGroups": [
+    "$Shared Resources$"
+  ],
+  "environments": [
+    {
+      "id": 1,
+      "name": "Production",
+      "rank": 1,
+      "owner": {
+        "displayName": "$OwnerDisplayName$",
+        "url": "",
+        "_links": "{}",
+        "id": "$OwnerId$",
+        "uniqueName": "$OwnerUniqueName$",
+        "imageUrl": "",
+        "descriptor": ""
+      },
+      "variables": {},
+      "variableGroups": [],
+      "preDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 1
+          }
+        ],
+        "approvalOptions": {
+          "requiredApproverCount": null,
+          "releaseCreatorCanBeApprover": false,
+          "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+          "enforceIdentityRevalidation": false,
+          "timeoutInMinutes": 0,
+          "executionOrder": "beforeGates"
+        }
+      },
+      "deployStep": {
+        "id": 2
+      },
+      "postDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 3
+          }
+        ],
+        "approvalOptions": {
+          "requiredApproverCount": null,
+          "releaseCreatorCanBeApprover": false,
+          "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+          "enforceIdentityRevalidation": false,
+          "timeoutInMinutes": 0,
+          "executionOrder": "afterSuccessfulGates"
+        }
+      },
+      "deployPhases": [
+        {
+          "deploymentInput": {
+            "parallelExecution": {
+              "parallelExecutionType": "none"
+            },
+            "agentSpecification": {
+              "identifier": "ubuntu-18.04"
+            },
+            "skipArtifactsDownload": false,
+            "artifactsDownloadInput": {
+              "downloadInputs": []
+            },
+            "queueId": "$Azure Pipelines$",
+            "demands": [],
+            "enableAccessToken": false,
+            "timeoutInMinutes": 0,
+            "jobCancelTimeoutInMinutes": 1,
+            "condition": "succeeded()",
+            "overrideInputs": {}
+          },
+          "rank": 1,
+          "phaseType": "agentBasedDeployment",
+          "name": "Agent job",
+          "refName": null,
+          "workflowTasks": [
+            {
+              "environment": {},
+              "taskId": "5bfb729a-a7c8-4a78-a7c3-8d717bb7c13c",
+              "version": "2.*",
+              "name": "Copy Files to agent",
+              "refName": "",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "SourceFolder": "$(System.DefaultWorkingDirectory)/_Build Multi-container WordPress on Azure-CI/drop",
+                "Contents": "**",
+                "TargetFolder": "$(agent.builddirectory)",
+                "CleanTargetFolder": "false",
+                "OverWrite": "false",
+                "flattenFolders": "false",
+                "preserveTimestamp": "false"
+              }
+            },
+            {
+              "environment": {},
+              "taskId": "46e4be58-730b-4389-8a2f-ea10b3e5e815",
+              "version": "1.*",
+              "name": "Azure CLI  - Retrieve variables",
+              "refName": "",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "connectedServiceNameARM": "",
+                "scriptLocation": "inlineScript",
+                "scriptPath": "",
+                "inlineScript": "WPDBHOST=$(az mysql server show -g $(RESOURCEGROUP_SHARED) -n $(MYSQLSVR) --query \"fullyQualifiedDomainName\" -o tsv)\necho \"##vso[task.setvariable variable=WPDBHOST]$WPDBHOST\"",
+                "args": "",
+                "addSpnToEnvironment": "false",
+                "useGlobalConfig": "false",
+                "cwd": "",
+                "failOnStandardError": "false"
+              }
+            },
+            {
+              "environment": {},
+              "taskId": "46e4be58-730b-4389-8a2f-ea10b3e5e815",
+              "version": "1.*",
+              "name": "Azure CLI - Update Application Settings",
+              "refName": "",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "connectedServiceNameARM": "",
+                "scriptLocation": "inlineScript",
+                "scriptPath": "",
+                "inlineScript": "az webapp config appsettings set \\\n-n $(WEBAPP) \\\n-g $(RESOURCEGROUP_WEBAPP) \\\n--settings \"WEBSITES_ENABLE_APP_SERVICE_STORAGE=true\" \\\n\"WORDPRESS_DB_HOST=$(WPDBHOST)\" \\\n\"WORDPRESS_DB_NAME=$(MYSQLDB)\" \\\n\"WORDPRESS_DB_USER=$(MYSQLUSER)@$(MYSQLSVR)\" \\\n\"WORDPRESS_DB_PASSWORD=$(mysqladminpwd)\" \\\n\"MYSQL_SSL_CA=BaltimoreCyberTrustroot.crt.pem\" \\\n\"WP_REDIS_HOST=redis\"",
+                "args": "",
+                "addSpnToEnvironment": "false",
+                "useGlobalConfig": "false",
+                "cwd": "",
+                "failOnStandardError": "false"
+              }
+            },
+            {
+              "environment": {},
+              "taskId": "46e4be58-730b-4389-8a2f-ea10b3e5e815",
+              "version": "1.*",
+              "name": "Azure CLI  - Set Azure Storage as Persistent Storage",
+              "refName": "",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "connectedServiceNameARM": "",
+                "scriptLocation": "scriptPath",
+                "scriptPath": "$(agent.builddirectory)/deploy/azuredeploy_storage.sh",
+                "inlineScript": "WPDBHOST=$(az mysql server show -g $(RESOURCEGROUP_SHARED) -n $(MYSQLSVR) --query \"fullyQualifiedDomainName\" -o tsv)\necho \"##vso[task.setvariable variable=WPDBHOST]$WPDBHOST\"",
+                "args": "-r $(RESOURCEGROUP_WEBAPP) -w $(WEBAPP) -x $(STORAGEACC) -y $(FILESHARE) -c $(CUSTOMID)",
+                "addSpnToEnvironment": "false",
+                "useGlobalConfig": "false",
+                "cwd": "$(agent.builddirectory)",
+                "failOnStandardError": "false"
+              }
+            },
+            {
+              "environment": {},
+              "taskId": "a8515ec8-7254-4ffd-912c-86772e2b5962",
+              "version": "3.*",
+              "name": "Replace tokens in docker-compose-mc-wordpress-storage.yml",
+              "refName": "",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "rootDirectory": "$(agent.builddirectory)",
+                "targetFiles": "docker-compose-mc-wordpress-storage.yml",
+                "encoding": "auto",
+                "writeBOM": "true",
+                "escapeType": "auto",
+                "escapeChar": "",
+                "charsToEscape": "",
+                "verbosity": "normal",
+                "actionOnMissing": "warn",
+                "keepToken": "false",
+                "tokenPrefix": "#{",
+                "tokenSuffix": "}#",
+                "emptyValue": "(empty)"
+              }
+            },
+            {
+              "environment": {},
+              "taskId": "46e4be58-730b-4389-8a2f-ea10b3e5e815",
+              "version": "1.*",
+              "name": "Azure CLI - Update Container Settings",
+              "refName": "",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "connectedServiceNameARM": "",
+                "scriptLocation": "inlineScript",
+                "scriptPath": "",
+                "inlineScript": "az webapp config container set \\\n--resource-group $(RESOURCEGROUP_WEBAPP) \\\n--name $(WEBAPP) \\\n--multicontainer-config-type compose \\\n--multicontainer-config-file $(TARGET_YML)",
+                "args": "",
+                "addSpnToEnvironment": "false",
+                "useGlobalConfig": "false",
+                "cwd": "$(agent.builddirectory)",
+                "failOnStandardError": "false"
+              }
+            }
+          ]
+        }
+      ],
+      "environmentOptions": {
+        "emailNotificationType": "OnlyOnFailure",
+        "emailRecipients": "release.environment.owner;release.creator",
+        "skipArtifactsDownload": false,
+        "timeoutInMinutes": 0,
+        "enableAccessToken": false,
+        "publishDeploymentStatus": true,
+        "badgeEnabled": false,
+        "autoLinkWorkItems": false,
+        "pullRequestDeploymentEnabled": false
+      },
+      "demands": [],
+      "conditions": [
+        {
+          "name": "ReleaseStarted",
+          "conditionType": "event",
+          "value": ""
+        }
+      ],
+      "executionPolicy": {
+        "concurrencyCount": 1,
+        "queueDepthCount": 0
+      },
+      "schedules": [],
+      "currentRelease": {
+        "id": 14,
+        "url": "https://vsrm.dev.azure.com/pavander/c601a5ed-9701-41ba-8eb8-c56952468b6c/_apis/Release/releases/14",
+        "_links": {}
+      },
+      "retentionPolicy": {
+        "daysToKeep": 30,
+        "releasesToKeep": 3,
+        "retainBuild": true
+      },
+      "processParameters": {},
+      "properties": {
+        "BoardsEnvironmentType": {
+          "$type": "System.String",
+          "$value": "unmapped"
+        },
+        "LinkBoardsWorkItems": {
+          "$type": "System.String",
+          "$value": "False"
+        }
+      },
+      "preDeploymentGates": {
+        "id": 0,
+        "gatesOptions": null,
+        "gates": []
+      },
+      "postDeploymentGates": {
+        "id": 0,
+        "gatesOptions": null,
+        "gates": []
+      },
+      "environmentTriggers": [],
+      "badgeUrl": ""
+    }
+  ],
+  "artifacts": [
+    {
+      "sourceId": "$ProjectId$:$Build Multi-container WordPress on Azure-CI-id$",
+      "type": "Build",
+      "alias": "_Build Multi-container WordPress on Azure-CI",
+      "definitionReference": {
+        "artifactSourceDefinitionUrl": "{}",
+        "defaultVersionBranch": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionSpecific": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionTags": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionType": {
+          "id": "latestType",
+          "name": "Latest"
+        },
+        "definition": {
+          "id": "$Build Multi-container WordPress on Azure-CI-id$",
+          "name": "Build Multi-container WordPress on Azure-CI"
+        },
+        "definitions": {
+          "id": "",
+          "name": ""
+        },
+        "IsMultiDefinitionType": {
+          "id": "False",
+          "name": "False"
+        },
+        "project": {
+          "id": "$ProjectId$",
+          "name": "$ProjectName$"
+        },
+        "repository": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "isPrimary": true,
+      "isRetained": false
+    }
+  ],
+  "triggers": [
+    {
+      "artifactAlias": "_Build Multi-container WordPress on Azure-CI",
+      "triggerConditions": [],
+      "triggerType": "artifactSource"
+    }
+  ],
+  "releaseNameFormat": "Release-$(rev:r)",
+  "tags": [],
+  "properties": {
+    "DefinitionCreationSource": {
+      "$type": "System.String",
+      "$value": "ReleaseNew"
+    },
+    "IntegrateBoardsWorkItems": {
+      "$type": "System.String",
+      "$value": "False"
+    },
+    "IntegrateJiraWorkItems": {
+      "$type": "System.String",
+      "$value": "false"
+    }
+  },
+  "id": "",
+  "name": "Release Multi-container WordPress on Azure-CD",
+  "path": "\\",
+  "projectReference": null,
+  "url": "",
+  "_links": "{}"
+}
