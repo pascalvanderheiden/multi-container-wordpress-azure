@@ -21,7 +21,7 @@ Just click Enable
 In Wordpress, install plug-in "CDN Enabler"
 Change the settings of the plugin: url http://cdn.<FQDN>
   
-## Create wildcard SSL Certificate
+## Create wildcard SSL Certificate for your website (optional)
 wget https://dl.eff.org/certbot-auto
 chmod a+x ./certbot-auto
 sudo ./certbot-auto
@@ -31,18 +31,7 @@ sudo ./certbot-auto certonly \
 --manual --preferred-challenges dns \
 -d *.<your-domain.com>
 
-## Result
-IMPORTANT NOTES:
- - Congratulations! Your certificate and chain have been saved at:
-   /etc/letsencrypt/live/turbopascal.nl/fullchain.pem
-   Your key file has been saved at:
-   /etc/letsencrypt/live/<your-domain.com>/privkey.pem
-   Your cert will expire on 2020-01-01. To obtain a new or tweaked
-   version of this certificate in the future, simply run certbot-auto
-   again. To non-interactively renew *all* of your certificates, run
-   "certbot-auto renew"
-
-## Renew
+## Renew Certificate
 certbot-auto renew
 
 ## Convert to PFX
