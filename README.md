@@ -4,7 +4,13 @@ A fully automated DevOps deployment of CMS WordPress on Azure App Services in a 
 The multi-container setup is used to host WordPress and Redis Cache in one App Service. This DevOps project is inspired on: https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-multi-container-app
 
 ## DevOps Project included
-In the DevOps folder the Azure DevOps template is included. Import this project and you are ready to go.
+In the DevOps folder the Azure DevOps template is included. Login with your account and Open the DevOps Generator: 
+https://azuredevopsdemogenerator.azurewebsites.net/environment/createproject
+
+Choose Template, Private and download the Zip from this URL:
+https://github.com/pascalvanderheiden/multi-container-wordpress-azure/blob/master/devops/Multi-container%20WordPress%20on%20Azure.zip
+
+Point to this downloaded file.
 
 ## Create a Service Principle for the deployement
 In the Cloud Shell: 
