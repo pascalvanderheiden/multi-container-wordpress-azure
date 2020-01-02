@@ -77,21 +77,9 @@ then
     --share-name $FILESHARE \
     --account-name $STORAGEACC \
     --access-key "$ACCESSKEY" \
-    --mount-path "/www"
+    --mount-path "/var/wp"
 
     echo "   Storage Account ${STORAGEACC} linked"
 else
 	echo "   Storage Account ${STORAGEACC} already linked, or not added"
-fi
-
-# Update Application Setting not to look at local
-if [[ -n "$CUSTOMID" && -n "$STORAGEACC" && -n "$FILESHARE" ]]
-then
-    az webapp config appsettings set \
-    -n $WEBAPP \
-    -g $RESOURCEGROUP_WEBAPP \
-    --settings "WEBSITES_ENABLE_APP_SERVICE_STORAGE=false"
-    echo "   Application Settings ${WEBAPP} updated"
-else
-	echo "   Application Settings ${WEBAPP} not updated, looking at container storage"
 fi

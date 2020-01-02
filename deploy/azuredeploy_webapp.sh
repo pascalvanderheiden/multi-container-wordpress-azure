@@ -155,9 +155,6 @@ then
 	then
 		# Create Azure File Share
 		az storage share create --name $FILESHARE --account-name $STORAGEACC --account-key $ACCESSKEY --quota 64
-
-		# Create Directory
-		az storage directory create -n "www" -s $FILESHARE --account-name $STORAGEACC --account-key $ACCESSKEY
 	else
 		echo "   Azure File Share ${FILESHARE} already exists"
 	fi

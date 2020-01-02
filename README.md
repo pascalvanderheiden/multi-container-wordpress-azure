@@ -23,7 +23,7 @@ https://vstsdemodata.visualstudio.com/AzureDevOpsDemoGenerator/_wiki/wikis/Azure
 
 ## Create a Service Principle for the deployment
 In the Cloud Shell: 
-- az ad sp create-for-rbac --name <your-service-principle-name>
+- az ad sp create-for-rbac --name your-service-principle-name
 
 Copy output JSON: AppId and password and use this SP in DevOps to deploy your project.
 

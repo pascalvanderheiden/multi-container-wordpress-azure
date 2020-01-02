@@ -1,14 +1,17 @@
 version: '3.3'
 
 services:
-   wordpress:
-     image: microsoft/multicontainerwordpress
-     volumes:
-       - #{CUSTOMID}#/www:/var/www/html
-     ports:
-       - "8000:80"
-     restart: always
+  wordpress:
+    image: microsoft/multicontainerwordpress
+    volumes:
+      - #{CUSTOMID}#:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
 
-   redis:
-     image: redis:3-alpine
-     restart: always
+    redis:
+      image: redis:3-alpine
+      restart: always
+
+volumes:
+  #{CUSTOMID}#:
