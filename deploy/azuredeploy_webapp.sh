@@ -145,14 +145,18 @@ fi
 # Creating Azure File Share (optional)
 #-------------------------------------------- 
 echo "Creating Azure File Share ${FILESHARE}"
-RESULT=$(az storage share show --name $FILESHARE)
-if [[ "$RESULT" = "" && -n "$FILESHARE" ]]
+
+# Get Storage Access Key
+ACCESSKEY=$(az storage account keys list -g $RESOURCEGROUP_SHARED -n $STORAGEACC --query [0].value -o tsv)
+
+RESULT=$(az storage share exists --account-name $STORAGEACC --account-key $ACCESSKEY --name $FILESHARE)
+if [[ "$RESULT" = "false" && -n "$FILESHARE" ]]
 then
 	# Create Azure File Share
-	az storage share create --name $FILESHARE --account-name $STORAGEACC --quota 64
+	az storage share create --name $FILESHARE --account-name $STORAGEACC --account-key $ACCESSKEY --quota 64
 
 	# Create Directory
-	az storage directory create -n "www" -s $FILESHARE --account-name $STORAGEACC
+	az storage directory create -n "www" -s $FILESHARE --account-name $STORAGEACC --account-key $ACCESSKEY
 else
-	echo "   Azufe File Share ${FILESHARE} already exists or is not provided"
+	echo "   Azure File Share ${FILESHARE} already exists or is not provided"
 fi
