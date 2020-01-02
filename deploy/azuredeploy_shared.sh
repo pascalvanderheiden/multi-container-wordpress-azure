@@ -3,7 +3,6 @@
 # Arguments
 # -r Resource Group Name
 # -l Location Name
-# -a App Service Plan Name
 # -m MySQL Server Name
 # -u MySQL Admin User
 # -k Key Vault
@@ -12,7 +11,7 @@
 # -s Storage Account - empty to be optional (otherwise it will use the container storage as persistent storage)
 # 
 # Executing it with minimum parameters:
-#   ./azuredeploy_shared.sh -r wordpress-rg -l westeurope -a wordpress-sp -m wp-mysql-svr -u mysqladmin -k wordpress-kv -p mysqladminpwd -c wordpress-cdn -s wordpressst01
+#   ./azuredeploy_shared.sh -r wordpress-rg -l westeurope -m wp-mysql-svr -u mysqladmin -k wordpress-kv -p mysqladminpwd -c wordpress-cdn -s wordpressst01
 #
 # This script assumes that you already executed "az login" to authenticate 
 #
@@ -21,13 +20,12 @@
 # For example: az ad sp create-for-rbac --name multicontainerwponazure
 # Copy output JSON: AppId and password
 
-while getopts r:l:a:m:u:k:p:c:s: option
+while getopts r:l:m:u:k:p:c:s: option
 do
 	case "${option}"
 	in
 		r) RESOURCEGROUP=${OPTARG};;
 		l) LOCATION=${OPTARG};;
-		a) SERVICEPLAN=${OPTARG};;
 		m) MYSQLSVR=${OPTARG};;
 		u) MYSQLUSER=${OPTARG};;
 		k) KV=${OPTARG};;
@@ -51,7 +49,6 @@ trim() {
 echo "Input parameters"
 echo "   Resource Group: ${RESOURCEGROUP}"
 echo "   Location: ${LOCATION}"
-echo "   App Service Plan: ${SERVICEPLAN}"
 echo "   MySQL Server: ${MYSQLSVR}" 
 echo "   MySQL Admin User: ${MYSQLUSER}"
 echo "   Key Vault: ${KV}"
@@ -98,18 +95,6 @@ then
 else
 	echo "   Key Vault ${KV} already exists, retrieve mysqlpassword"
 	MYSQLPASSWORD=$(az keyvault secret show --name "$KVMYSQLPWD" --vault-name "$KV" --query value -o tsv)
-fi
-
-#--------------------------------------------
-# Creating App Service Plan
-#-------------------------------------------- 
-echo "Creating App Service Plan ${SERVICEPLAN}"
-RESULT=$(az appservice plan show -n $SERVICEPLAN -g $RESOURCEGROUP)
-if [ "$RESULT" = "" ]
-then
-	az appservice plan create -n $SERVICEPLAN -g $RESOURCEGROUP -l $LOCATION --is-linux --sku S1
-else
-	echo "   App Service Plan ${SERVICEPLAN} already exists"
 fi
 
 #--------------------------------------------

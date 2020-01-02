@@ -14,14 +14,16 @@ https://azuredevopsdemogenerator.azurewebsites.net/environment/createproject
 Choose a custom template and point to the zip-file in the devops folder. This repro will be imported into Azure DevOps and Pipelines are created for you.
 The project is split-up into 2 pieces; shared resources & web app resources. Enabling you to extend your project with more web apps and re-using the shared resources for cost efficiency.
 
-Update the variables, and create a service principle (see below) to deploy your resources to Azure.
+Update the variables, and create a service principle (see below) to deploy your resources to Azure. 
+
+Note. Use unique names for your Web App and Storage. Check the log in DevOps to see if all resources have been created accordingly.
 
 You can find the documentation on the Azure DevOps Generator here:
 https://vstsdemodata.visualstudio.com/AzureDevOpsDemoGenerator/_wiki/wikis/AzureDevOpsGenerator.wiki/58/Build-your-own-template
 
 ## Create a Service Principle for the deployment
 In the Cloud Shell: 
-- az ad sp create-for-rbac --name multicontainerwponazure
+- az ad sp create-for-rbac --name <your-service-principle-name>
 
 Copy output JSON: AppId and password and use this SP in DevOps to deploy your project.
 
