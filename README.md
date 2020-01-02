@@ -14,7 +14,7 @@ https://azuredevopsdemogenerator.azurewebsites.net/environment/createproject
 Choose a custom template and point to the zip-file in the devops folder. This repro will be imported into Azure DevOps and Pipelines are created for you.
 The project is split-up into 2 pieces; shared resources & web app resources. Enabling you to extend your project with more web apps and re-using the shared resources for cost efficiency.
 
-Update the variables, and create a service principle (see below) to deploy your resources to Azure. 
+Update the variables, and create a service principle (see below) to deploy your resources to Azure. After you've run the Build Pipeline successfully, create a variable group for the mysqladminpwd, which is stored in the Key Vault. And then link it to Release Pipeline.
 
 Note. Use unique names for your Web App and Storage. Check the log in DevOps to see if all resources have been created accordingly.
 
