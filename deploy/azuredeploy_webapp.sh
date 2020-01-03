@@ -121,7 +121,7 @@ echo "Creating WebApp ${WEBAPP}"
 RESULT=$(az webapp show -n $WEBAPP -g $RESOURCEGROUP_WEBAPP)
 if [ "$RESULT" = "" ]
 then
-	az webapp create -n $WEBAPP -g $RESOURCEGROUP_WEBAPP -p $SERVICEPLAN --multicontainer-config-type compose --multicontainer-config-file docker-compose-wordpress.yml
+	az webapp create -n $WEBAPP -g $RESOURCEGROUP_WEBAPP -p $SERVICEPLAN
 else
 	echo "   WebApp ${WEBAPP} already exists"
 fi
