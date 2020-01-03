@@ -79,6 +79,6 @@ In WordPress, the plugin "Redis Object Cache" is already pre-installed on the th
 Go to Plugins and Enable the plugin.
 
 ## CDN Plugin in WordPress
-In Wordpress, install the plugin "CDN Enabler". Or, when you have the wp-content folder mounted in Azure Storage, decompress the plugin from the wordpress-plugins folder in this repro and copy it into the "Plugins" folder.
+In Wordpress, install the plugin "CDN Enabler". Or, when you have the wp-content folder mounted in Azure Storage, decompress the plugin from the wordpress-plugins folder in this repro and copy it into the "Plugins" folder using Azure Storage Explorer.
 Go to Plugins and Enable the plugin.
 Change the settings of the plugin and point it to the CDN Endpoint you've created earlier.
