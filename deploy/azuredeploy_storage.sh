@@ -77,7 +77,7 @@ then
     --share-name $FILESHARE \
     --account-name $STORAGEACC \
     --access-key "$ACCESSKEY" \
-    --mount-path "/var/wp"
+    --mount-path "/wp-content/"
 
     echo "   Storage Account ${STORAGEACC} linked"
 else

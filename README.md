@@ -62,18 +62,23 @@ Note. Because I've enabled continuous deployment in my template, there is a fail
 Select "Release Multi-container WordPress on Azure-CD", Edit.
 In Tasks, select the Tasks which have the explaination mark "Some settings need attention", and update Azure Subscription to your Service Principal Connection.
 In Variables, update the variables to match the naming you used in the Build pipeline. The WPDBHOST you can leave empty, because it will be updated in the pipeline.
+In Variables groups, link the "Key Vault Secrets" variable group, by clicking the Link button. 
 The TARGET_YML will need to point to the yaml configuration files in repro. This will determine how the App Service is configured. There are 4 files:
 - compose-wordpress.yml (sample multi-container setup with redis, using local (not persistent) storage)
 - docker-compose-wordpress.yml (sample multi-container setup with MySQL, using local (not persistent) storage)
-- docker-compose-mc-wordpress-storage.yml (multi-container setup with redis, using Azure Storage as persistent storage)
+- docker-compose-mc-wordpress-storage.yml (multi-container setup with redis, using Azure Storage for wp-content folder)
 - docker-compose-mc-wordpress.yml (multi-container setup with redis, using Azure App Service as persistent storage)
 The first 2 yaml's are more inspirational, the last 2 I would use for my deployment, because persistent storage is a must! Keep in mind that it would be illogical to use the last yaml file, and configure Azure Storage. Just leave the variable empty to skip this installation.
-Save & Create Release. 
+Save & Create Release.
+
+## Step 8: Go to your websites
+You need to run the website url one time, to trigger the compose script to download the WordPress image to the persistent storage location. This will take a 2-3 minutes to download.
 
 ## Redis Object Cache Plugin in WordPress
-In WordPress, install plug-in "Redis Object Cache".
-Just click Enable.
+In WordPress, the plugin "Redis Object Cache" is already pre-installed on the this image.
+Go to Plugins and Enable the plugin.
 
 ## CDN Plugin in WordPress
-In Wordpress, install plug-in "CDN Enabler".
+In Wordpress, install the plugin "CDN Enabler". Or, when you have the wp-content folder mounted in Azure Storage, decompress the plugin from the wordpress-plugins folder in this repro and copy it into the "Plugins" folder.
+Go to Plugins and Enable the plugin.
 Change the settings of the plugin and point it to the CDN Endpoint you've created earlier.

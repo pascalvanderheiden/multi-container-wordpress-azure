@@ -4,7 +4,8 @@ services:
   wordpress:
     image: microsoft/multicontainerwordpress
     volumes:
-      - #{CUSTOMID}#:/var/www/html
+      - ${WEBAPP_STORAGE_HOME}/site/wwwroot:/var/www/html
+      - #{CUSTOMID}#:/var/www/html/wp-content
     ports:
       - "8000:80"
     restart: always
@@ -12,6 +13,3 @@ services:
     redis:
       image: redis:3-alpine
       restart: always
-
-volumes:
-  #{CUSTOMID}#:
