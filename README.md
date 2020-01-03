@@ -65,7 +65,7 @@ Note. Because I've enabled continuous deployment in my template, there is a fail
     + docker-compose-wordpress.yml (sample multi-container setup with MySQL, using local (not persistent) storage)
     + docker-compose-mc-wordpress-storage.yml (multi-container setup with redis, using Azure Storage for wp-content folder)
     + docker-compose-mc-wordpress.yml (multi-container setup with redis, using Azure App Service as persistent storage)
-The first 2 yaml's are more inspirational, the last 2 I would use for my deployment, because persistent storage is a must! Keep in mind that it would be illogical to use the last yaml file, and configure Azure Storage. Just leave the variable empty to skip this installation.
+- The first 2 yaml's are more inspirational, the last 2 I would use for my deployment, because persistent storage is a must! Keep in mind that it would be illogical to use the last yaml file, and configure Azure Storage. Just leave the variable empty to skip this installation.
 Save & Create Release.
 
 ## Step 8: Go to your websites
