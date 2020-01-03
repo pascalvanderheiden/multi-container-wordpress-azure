@@ -61,10 +61,10 @@ Note. Because I've enabled continuous deployment in my template, there is a fail
 - In Variables, update the variables to match the naming you used in the Build pipeline. The WPDBHOST you can leave empty, because it will be updated in the pipeline.
 - In Variables groups, link the "Key Vault Secrets" variable group, by clicking the Link button. 
 - The TARGET_YML will need to point to the yaml configuration files in repro. This will determine how the App Service is configured. There are 4 files:
-+ compose-wordpress.yml (sample multi-container setup with redis, using local (not persistent) storage)
-+ docker-compose-wordpress.yml (sample multi-container setup with MySQL, using local (not persistent) storage)
-+ docker-compose-mc-wordpress-storage.yml (multi-container setup with redis, using Azure Storage for wp-content folder)
-+ docker-compose-mc-wordpress.yml (multi-container setup with redis, using Azure App Service as persistent storage)
+    + compose-wordpress.yml (sample multi-container setup with redis, using local (not persistent) storage)
+    + docker-compose-wordpress.yml (sample multi-container setup with MySQL, using local (not persistent) storage)
+    + docker-compose-mc-wordpress-storage.yml (multi-container setup with redis, using Azure Storage for wp-content folder)
+    + docker-compose-mc-wordpress.yml (multi-container setup with redis, using Azure App Service as persistent storage)
 The first 2 yaml's are more inspirational, the last 2 I would use for my deployment, because persistent storage is a must! Keep in mind that it would be illogical to use the last yaml file, and configure Azure Storage. Just leave the variable empty to skip this installation.
 Save & Create Release.
 
