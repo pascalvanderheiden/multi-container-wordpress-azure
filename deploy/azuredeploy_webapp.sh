@@ -136,7 +136,7 @@ RESULT=$(az cdn endpoint show -n $CDN_ENDPOINT --profile-name $CDN -g $RESOURCEG
 if [[ -z "$RESULT" && -n "$CDN_ENDPOINT" ]]
 then
 	# Endpoint
-	az cdn endpoint create -g $RESOURCEGROUP_SHARED -n $CDN_ENDPOINT --profile-name $CDN --origin $FQDN
+	az cdn endpoint create -g $RESOURCEGROUP_SHARED -n $CDN_ENDPOINT --profile-name $CDN --origin $FQDN --origin-host-header $FQDN
 else
 	echo "   CDN Endpoint ${CDN_ENDPOINT} already exists or is not provided"
 fi

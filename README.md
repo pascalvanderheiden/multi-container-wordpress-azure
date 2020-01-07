@@ -79,6 +79,7 @@ You need to run the website url one time, to trigger the compose script to downl
 - In Wordpress, install the plugin "CDN Enabler". Or, when you have the wp-content folder mounted in Azure Storage, decompress the plugin from the wordpress-plugins folder in this repro and copy it into the "Plugins" folder using Azure Storage Explorer.
 - Go to Plugins and Enable the plugin.
 Change the settings of the plugin and point it to the CDN Endpoint you've created earlier.
+- Go to Azure, to your CDN Endpoint, and trigger a purge all to refresh. I've included a bash script in the deploy folder to trigger the purge in bash.
 
 ## Contributing
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
