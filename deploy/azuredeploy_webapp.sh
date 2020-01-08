@@ -97,7 +97,7 @@ echo "Creating App Service Plan ${SERVICEPLAN}"
 RESULT=$(az appservice plan show -n $SERVICEPLAN -g $RESOURCEGROUP_WEBAPP)
 if [ "$RESULT" = "" ]
 then
-	az appservice plan create -n $SERVICEPLAN -g $RESOURCEGROUP_WEBAPP -l $LOCATION --is-linux --sku S1
+	az appservice plan create -n $SERVICEPLAN -g $RESOURCEGROUP_WEBAPP -l $LOCATION --is-linux --sku P1V2
 else
 	echo "   App Service Plan ${SERVICEPLAN} already exists"
 fi

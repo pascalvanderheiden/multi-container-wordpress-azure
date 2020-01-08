@@ -16,9 +16,9 @@ In the Azure Cloud Shell (https://shell.azure.com):
 Copy the JSON Output! We'll be needing this information to create the service connection in Azure DevOps.
 
 ### Step 2: Generate your Azure DevOps Project for Continuous Integration & Deployment with the Azure DevOps Generator
-- In the devops folder of this repro the Azure DevOps template is included. Download it.
+- In the devops folder of this repo the Azure DevOps template is included. Download it.
 - Login with your account and open the DevOps Generator: https://azuredevopsdemogenerator.azurewebsites.net/environment/createproject
-- Choose a custom template and point to the zip-file in the devops folder. This repro will be imported into Azure DevOps and Pipelines are created for you.
+- Choose a custom template and point to the zip-file in the devops folder. This repo will be imported into Azure DevOps and Pipelines are created for you.
 - The project is split-up into 2 pieces; shared resources & web app resources. Enabling you to extend your project with more web apps and re-using the shared resources for cost efficiency.
 - You can find the documentation on the Azure DevOps Generator here: https://vstsdemodata.visualstudio.com/AzureDevOpsDemoGenerator/_wiki/wikis/AzureDevOpsGenerator.wiki/58/Build-your-own-template
 
@@ -35,6 +35,7 @@ Copy the JSON Output! We'll be needing this information to create the service co
 - Tick "Allow access to all pipelines.
 - Update the variables to match your naming conventions needs. You can leave the Storage Account and CDN empty if you don't want to use these services. Keep in mind to pick unique naming for exposed services.
 - The variable "KVMYSQLPWD" is NOT the MySQL password, but the naming tag in Key Vault for the MySQL password. Leave that as it is: "mysqladminpwd".
+- The variable "MYSQLUSER" cannot be longer than 16 characters.
 - Don't forget to save.
 
 ### Step 5: In Azure DevOps, update the Build pipeline and Run it.
@@ -60,7 +61,7 @@ Note. Because I've enabled continuous deployment in my template, there is a fail
 - In Tasks, select the Tasks which have the explaination mark "Some settings need attention", and update Azure Subscription to your Service Principal Connection.
 - In Variables, update the variables to match the naming you used in the Build pipeline. The WPDBHOST you can leave empty, because it will be updated in the pipeline.
 - In Variables groups, link the "Key Vault Secrets" variable group, by clicking the Link button. 
-- The TARGET_YML will need to point to the yaml configuration files in repro. This will determine how the App Service is configured. There are 4 files:
+- The TARGET_YML will need to point to the yaml configuration files in repo. This will determine how the App Service is configured. In the DevOps project the TARGET_YML is default set to "docker-compose-mc-wordpress-storage.yml", which is the most complete config. For inspiration and learning I've included 4 configs:
     + compose-wordpress.yml (sample multi-container setup with redis, using local (not persistent) storage)
     + docker-compose-wordpress.yml (sample multi-container setup with MySQL, using local (not persistent) storage)
     + docker-compose-mc-wordpress-storage.yml (multi-container setup with redis, using Azure Storage for wp-content folder)
@@ -76,7 +77,7 @@ You need to run the website url one time, to trigger the compose script to downl
 - Go to Plugins and Enable the plugin.
 
 ## CDN Plugin in WordPress
-- In Wordpress, install the plugin "CDN Enabler". Or, when you have the wp-content folder mounted in Azure Storage, decompress the plugin from the wordpress-plugins folder in this repro and copy it into the "Plugins" folder using Azure Storage Explorer.
+- In Wordpress, install the plugin "CDN Enabler". Or, when you have the wp-content folder mounted in Azure Storage, decompress the plugin from the wordpress-plugins folder in this repo and copy it into the "Plugins" folder using Azure Storage Explorer.
 - Go to Plugins and Enable the plugin.
 Change the settings of the plugin and point it to the CDN Endpoint you've created earlier.
 - Go to Azure, to your CDN Endpoint, and trigger a purge all to refresh. I've included a bash script in the deploy folder to trigger the purge in bash.
